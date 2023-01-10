@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title></title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.dark.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                The title
+                <small class="hidden-xs hidden-sm">
+                    This is the default subtitle!
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container">
+            <div class="row">
+
+                
+                <section id="content" class="col-sm-12">
+                    <h1 id="how-to-create-a-server-on-azure">How to create a server on Azure</h1>
+<pre><code>    NB: Always choose the nearest location while creating the server.</code></pre>
+<p>Please follow the instructions below to set up the ML server on an ubuntu virtual machine in Azure
+cloud.</p>
+<ol>
+<li>
+<p>Login to azure portal</p>
+</li>
+<li>
+<p>Create a virtual Machine (VM)</p>
+<ul>
+<li>choose a resource group</li>
+<li>Set a virtual machine name</li>
+<li>Click Next: <strong>Disk</strong></li>
+<li>Click on create and attach a new disk and select your preferred size.</li>
+<li>Click next: <strong>Management</strong></li>
+<li>Click next: <strong>Advanced</strong></li>
+<li>Click next: <strong>Tags</strong></li>
+<li>Click next: <strong>Review and Create</strong></li>
+<li>Click <strong>create</strong></li>
+</ul>
+</li>
+<li>
+<p>After creating the server go to <strong>Networking</strong> tab from setting.</p>
+<ul>
+<li>Click on <strong>Add inbound port rule</strong></li>
+<li>Change the Name to <strong>Port_80</strong></li>
+<li>Change the <strong>Destination port ranges</strong> to <strong>80</strong></li>
+<li>Then click <strong>Add</strong></li>
+</ul>
+</li>
+<li>
+<p>Download private key and create resources</p>
+<ul>
+<li>Safely store the private key file. (important)</li>
+<li>Extension should be <strong>‘file_name.pem’</strong></li>
+</ul>
+</li>
+<li>
+<p>In your computer, run the following command</p>
+<pre><code>sudo chmod 400 file_name.pem</code></pre>
+</li>
+<li>
+<p>To connect your pc to the azure server, run:</p>
+<pre><code>ssh -i file_name.pem azureuser@ip_address</code></pre>
+<ul>
+<li>This makes azure accessible through your local terminal</li>
+<li>please note the public IP address provided when VM was created</li>
+</ul>
+</li>
+<li>
+<p>To upload project, zip the folder and run the command:</p>
+<pre><code>scp -i file_name.pem home/path_of_project.zip azureuser@ip_address:</code></pre>
+<ul>
+<li>NB: the colon after the command is important</li>
+<li>Once the command is run, the project folder is uploaded in the VM</li>
+</ul>
+</li>
+</ol>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+        <!-- Livereload -->
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+                    ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+        <!-- End Livereload -->
+    </body>
+</html>

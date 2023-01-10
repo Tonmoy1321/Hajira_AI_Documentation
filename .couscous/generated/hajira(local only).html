@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title></title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/highlight.dark.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="/">
+                The title
+                <small class="hidden-xs hidden-sm">
+                    This is the default subtitle!
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container">
+            <div class="row">
+
+                
+                <section id="content" class="col-sm-12">
+                    <h1 id="hajira">Hajira</h1>
+<p>Hajira is a ML based attendance system, which enables user to setup a seamless attendance system using only 2 IP camera.
+<a href="https://nodesource.com/products/nsolid"><img src="https://cldup.com/dTxpPi9lDf.thumb.png" alt="GR" /></a></p>
+<h2 id="step-1-creating-a-virtual-environment">Step-1: Creating a virtual environment</h2>
+<p>#</p>
+<h4 id="step-11-download-miniconda-and-install-it-with-python-3813">Step-1.1: Download Miniconda and Install it with python 3.8.13</h4>
+<p>Firstly, Install Anaconda/Miniconda: open terminal and download miniconda</p>
+<pre><code>  wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.10.3-Linux-x86_64.sh</code></pre>
+<h4 id="step-12">Step-1.2:</h4>
+<p>After download Miniconda, install it by typing</p>
+<pre><code class="language-bash">bash Miniconda3-py38_4.10.3-Linux-x86_64.sh</code></pre>
+<h4 id="step-13">Step-1.3:</h4>
+<p>Create an Environment (eg: gr)</p>
+<pre><code>conda create -n gr python=3.8.13</code></pre>
+<h4 id="step-14">Step-1.4:</h4>
+<p>Activate Environment:</p>
+<pre><code>conda activate gr</code></pre>
+<h2 id="step-2-install-required-packages">Step-2: Install required packages</h2>
+<h4 id="step-21">Step-2.1:</h4>
+<ul>
+<li>Download requirements.txt from &gt;= <a href="https://drive.google.com/file/d/1cX3p9hB-SIHsg7dMWFu-_DCxoVRIxO9a/view?usp=sharing"><code>Drive Link</code></a></li>
+<li>Then run the command: 
+<pre><code class="language-bash">pip install -r requirements.txt</code></pre>
+<h4 id="step-22optional">Step-2.2(Optional):</h4></li>
+<li>If there is an error to import opencv, simply run following command:
+<pre><code class="language-bash">sudo apt-get update
+sudo apt-get install ffmpeg libsm6 libxext6  -y</code></pre>
+<h4 id="step-23">Step-2.3:</h4></li>
+<li>Install Supervisor globally: 
+<pre><code class="language-bash">sudo apt install supervisor
+sudo apt update</code></pre>
+<h4 id="step-24optional">Step-2.4(Optional):</h4></li>
+<li>Install Cron globally:
+<pre><code class="language-bash">sudo apt install cron</code></pre>
+<p>Note: In most cases you won't have to do this cause cron is already bundled with Ubuntu 20.04 LTS.</p>
+<h2 id="step-3-automating-hajira-using-cronjob">Step-3: Automating Hajira using CronJob</h2>
+<p>The cron command-line utility is a job scheduler on Unix-like operating systems. Users who set up and maintain software environments use cron to schedule jobs, also known as cron jobs, to run periodically at fixed times, dates, or intervals.
+Steps is given below,</p></li>
+<li>Make a Launcher Sript</li>
+<li>Make It Executable</li>
+<li>Add Logs Directory</li>
+</ul>
+<h4 id="step-31-make-a-launcher-sript">Step-3.1: Make a Launcher Sript</h4>
+<p>Let's create the shell script!
+This bash file needs for startup running so that it will run automatically if it restarted.</p>
+<p>create bash file in terminal</p>
+<pre><code class="language-bash">touch RUN.sh</code></pre>
+<p>Then, edit with following commands in <code>RUN.sh</code></p>
+<pre><code class="language-bash">#!/bin/bash
+source /home/gr/miniconda3/bin/activate gr
+cd /
+cd /home/gr/Local_Hajira_lite_Dev/backend
+# path where the code exist
+sudo python3 cam1.py --accessway "in" &amp;
+sudo python3 cam2.py --accessway "out" &amp;
+cd /</code></pre>
+<p>Note: in base file, opencv and easydict may not be found while the python file running in bash. So, we need to append opencv and easydict path to program.</p>
+<p>Add this path upto <code>site-packages</code> on top of <code>cam1.py</code> and <code>cam2.py</code> files </p>
+<pre><code class="language-python">import sys
+sys.path.append('/home/gr/miniconda3/envs/gr/lib/python3.8/site-packages')</code></pre>
+<h4 id="step-32-make-it-executable">Step 3.2: Make It Executable</h4>
+<p>We need to make the launcher script an executable, which we do with this command,</p>
+<pre><code class="language-bash">chmod 755 RUN.sh</code></pre>
+<p>Now test it, by typing in:</p>
+<pre><code class="language-bash">bash RUN.sh</code></pre>
+<p>For exit, type and enter:</p>
+<pre><code class="language-bash">Ctrl+C</code></pre>
+<h4 id="step-33-add-logs-directory">Step 3.3: Add Logs Directory</h4>
+<p>We need to make a directory for the any errors in crontab to be logged.
+Go to Path:</p>
+<pre><code>/home/gr/Local_Hajira_lite_Dev/backend</code></pre>
+<p>Create a logs directory by opening terminal in directory.
+Then use the following command:</p>
+<pre><code>mkdir logs</code></pre>
+<p>the directory should have a PATH:</p>
+<pre><code>/home/gr/Local_Hajira_lite_Dev/backend/logs</code></pre>
+<h4 id="step-4-add-task-to-your-crontab">Step 4: Add task to Your Crontab</h4>
+<p>Type in termianl:</p>
+<pre><code class="language-bash">sudo crontab -e</code></pre>
+<p>This will bring up a crontab window.</p>
+<p>Now, enter the line:</p>
+<pre><code class="language-bash">@reboot bash /home/gr/Local_Hajira_lite_Dev/RUN.sh &gt;/home/gr/Local_Hajira_lite_Dev/backend/logs/cronlog 2&gt;&amp;1</code></pre>
+<p>Note: there is two paths. First one idicates to the RUN.sh file and second one to the logs folder.</p>
+<h2 id="step-5-setting-up-supervisor">Step-5: Setting UP Supervisor</h2>
+<p>Supervisor allows to monitor and control a number of processes on UNIX-like operating systems.</p>
+<h4 id="step-51-configured-supervisor-file">Step-5.1: Configured supervisor file</h4>
+<ul>
+<li>Create a supervisor file in <code>/etc/supervisor/conf.d/</code> and configure it according to your requirements.</li>
+<li>Type following command to create
+<pre><code class="language-python">sudo nano /etc/supervisor/conf.d/gr.conf</code></pre></li>
+</ul>
+<p>The file should lool like:</p>
+<pre><code class="language-python">[program:gr]
+directory=/home/gr/Face-Recognition-API/backend
+environment=PATH=/home/gr/miniconda3/envs/gr/bin
+command=/home/gr/miniconda3/envs/gr/bin/gunicorn app:app -b localhost:8080
+autostart=true
+autorestart=true
+stderr_logfile=/home/gr/Face-Recognition-API/backend/logs/err.err.log
+stdout_logfile=/home/gr/Face-Recognition-API/backend/logs/err.out.log</code></pre>
+<p>Note: Edit the path as your requirments and make sure that you created logs folder.</p>
+<h4 id="step-52-to-enable-the-configuration-run-the-following-commands">Step-5.2: To enable the configuration, run the following commands:</h4>
+<pre><code class="language-bash">sudo supervisorctl reread
+sudo service supervisor restart</code></pre>
+<p>This should start a new process. To check the status of all monitored apps, use the following command:</p>
+<pre><code class="language-bash">sudo supervisorctl status</code></pre>
+<p>Important: if you make any changes in the code and want to get updated results, you need to restart the supervisor by following commands:</p>
+<pre><code class="language-bash">sudo supervisorctl restart all</code></pre>
+<p>#</p>
+<h2 id="step-6-local-web-part">Step-6: Local Web Part</h2>
+<h4 id="step-61-installing-apache-and-updating-the-firewall">Step-6.1: Installing Apache and Updating the Firewall</h4>
+<p>Run the following commands on terminal:</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install apache2
+sudo systemctl start apache2
+sudo systemctl enable apache2
+sudo ufw allow “Apache Full”
+sudo systemctl restart apache2</code></pre>
+<h4 id="step-62-installing-mysql-and-creating-a-db">Step-6.2: Installing MySQL and creating a DB</h4>
+<p>Command for installing MySQl:</p>
+<pre><code class="language-bash">sudo apt install mysql-server</code></pre>
+<p>Creating Database: </p>
+<pre><code class="language-bash">sudo  mysql -u root -p
+CREATE DATABASE hajira_db;
+CREATE USER 'hajira_user'@'localhost' IDENTIFIED BY 'secretpassword';
+GRANT ALL ON hajira_db.* TO 'hajira_user'@'localhost';
+FLUSH PRIVILEGES;
+QUIT</code></pre>
+<h4 id="step-72-installing-php-and-additional-php-extensions">Step-7.2: Installing PHP and additional PHP extensions</h4>
+<p>Run following command in terminal:</p>
+<pre><code class="language-bash">sudo apt-get install apache2 php7.4 libapache2-mod-php7.4 php7.4-curl php-pear php7.4-gd php7.4-dev php7.4-zip php7.4-mbstring php7.4-mysql php7.4-xml curl -y</code></pre>
+<h4 id="step-63-installing-composer">Step-6.3: Installing Composer</h4>
+<pre><code class="language-bash">curl -sS https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+sudo chmod +x /usr/local/bin/composer</code></pre>
+<h4 id="step-64-virtual-host-setup">Step-6.4: Virtual host setup</h4>
+<p>Navigate to desired path using terminal:</p>
+<pre><code class="language-bash">cd /etc/apache2/sites-available</code></pre>
+<p>After directory is opened then run: </p>
+<pre><code class="language-bash">sudo touch local-face.test.conf
+sudo gedit local-face.test.conf</code></pre>
+<p>Then write the following code: </p>
+<pre><code>&lt;VirtualHost *:80&gt;
+    ServerName local-face.test
+    DocumentRoot /var/www/html/face-attendance-local/public
+    &lt;Directory "/var/www/html/face-attendance-local"&gt;
+        Require all granted
+    &lt;/Directory&gt;
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;</code></pre>
+<p>After setting up virtual host, run:</p>
+<pre><code class="language-bash">sudo systemctl reload apache2
+sudo a2ensite local-face.test
+sudo gedit /etc/hosts 127.0.0.1 local-face.test
+sudo systemctl reload apache2
+sudo a2enmod rewrite</code></pre>
+<p>Changing directive in conf file:</p>
+<pre><code class="language-bash">sudo gedit /etc/apache2/apache2.conf</code></pre>
+<p>Changing the <code>AllowOverride</code> directive for the /var/www directory to <code>AllowOverride All</code></p>
+<pre><code class="language-bash">sudo systemctl reload apache2</code></pre>
+<h4 id="step-65-env-setup-for-local-server">Step-6.5: .env setup for local server</h4>
+<p>Go to directory: <code>path: /var/www/html/face-attendance-local</code> using:</p>
+<pre><code class="language-bash">cd /var/www/html/face-attendance-local</code></pre>
+<p>Open .env using a editor and add the following lines:</p>
+<pre><code class="language-php">APP_DEBUG=true
+APP_URL=http://local-face.test/
+MONITOR_TOKEN=1a2b3c4d5e6f7g8h9i
+LOCAL_ML_URL=http://127.0.0.1:8001/
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=hajira_db
+DB_USERNAME=hajira_user
+DB_PASSWORD='secretpassword'</code></pre>
+<p>Then open terminal and run commands:</p>
+<pre><code class="language-bash">php artisan config:cache
+php artisan migrate:fresh --seed</code></pre>
+<h4 id="step-66-cron-setup">Step-6.6: Cron setup</h4>
+<p>Terminal Commands:</p>
+<pre><code class="language-bash">crontab -e</code></pre>
+<p>Add the following line:</p>
+<pre><code>cd /var/www/html/face-attendance-local &amp;&amp; php artisan schedule:run &gt;&gt; /dev/null 2&gt;&amp;1</code></pre>
+<h4 id="step-67-deploy-supervisor">Step-6.7: Deploy Supervisor</h4>
+<ul>
+<li>Deploy the facesocket and faceworker in supervisor</li>
+</ul>
+<h2 id="step-7-after-setting-up-hajira-on-machine">Step-7: After setting up Hajira on machine</h2>
+<p>We have to generate a new access key for the company being added to Facebank.
+Steps: </p>
+<ul>
+<li>Create a facebank on the web ml for the company.</li>
+<li>Create a token for the company.</li>
+<li>Add the token and facebank to config file on cloud. Facebank name on facebank list and token on token section.  </li>
+<li>Clean local web database. </li>
+<li>Create a facebank locally.</li>
+</ul>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+        <!-- Livereload -->
+        <script>
+            document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+                    ':35729/livereload.js?snipver=1"></' + 'script>')
+        </script>
+        <!-- End Livereload -->
+    </body>
+</html>
