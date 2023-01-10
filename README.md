@@ -287,4 +287,9 @@ Steps:
 * Clean local web database. 
 * Create a facebank locally.
 
-
+## Extra Tips
+* If images do not appear after syncing or can't copy any files/move files to any `folder`
+Run: 
+```bash
+sudo chmod 777 -R `folder`
+```
