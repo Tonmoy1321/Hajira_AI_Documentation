@@ -288,8 +288,8 @@ Steps:
 * Create a facebank locally.
 
 ## Extra Tips
-* If images do not appear after syncing or can't copy any files/move files to any `folder`
-Run: 
+* If images do not appear after syncing or can't copy any files/move files to any `folder`,
+Open terminal in that directory and Run: 
 ```bash
 sudo chmod 777 -R `folder`
 ```
