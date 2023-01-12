@@ -127,6 +127,15 @@ Now, enter the line:
 ```
 Note: there is two paths. First one idicates to the RUN.sh file and second one to the logs folder.
 
+Now, RUN:
+```bash
+crontab -e
+```
+Then add the line:
+```bash
+* * * * * cd /var/www/html/face-attendance-local && php artisan schedule:run >> /dev/null 2>&1
+```
+
 ## Step-5: Setting UP Supervisor
 Supervisor allows to monitor and control a number of processes on UNIX-like operating systems.
 #### Step-5.1: Configured supervisor file
