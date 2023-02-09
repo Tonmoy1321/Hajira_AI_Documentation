@@ -27,9 +27,11 @@ config = {
 ```
 
 5. Then go to location: `Local_Hajira_lite_Dev/backend/src/libs/facerecognition` and open the `Learner.py` file.
-6. After opening the file, make sure the `self.model_path` is written in a way that uses config file to read the path to new model weight folder. Example: ``` python3
+6. After opening the file, make sure the `self.model_path` is written in a way that uses config file to read the path to new model weight folder. 
+Example: 
+``` python3
  self.model_path = config['models_path']['face_recognition']['new_model_name']['path']+ '/' + config['models_path']['face_recognition']['new_model_name']['weight']` '
- ```
+```
 7. Make sure new model is loaded before inference; you may need to import a script that contains backbone of the new model. 
 8. Finally, DO NOT FORGET to replace the existing Facebank to a new fresh Facebank by going to the location: `Local_Hajira_lite_Dev/backend/checkpoints/facebank/fresh facebank`, copy `company_name.npy` and `company_name_embed.npy` file; then paste them in the following location: `Local_Hajira_lite_Dev/backend/checkpoints/facebank`. 
 9. After pasting the fresh facebank in the correct directory, go to location: `var/www/html/face-attendance-local/storage/app/public/users` 
