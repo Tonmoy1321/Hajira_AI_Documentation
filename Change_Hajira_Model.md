@@ -95,10 +95,7 @@ sudo apt-get install ffmpeg libsm6 libxext6  -y
 ```
 pip install onnx && pip install onnxruntime 
 ```
-* Install ncnn:
-```
-pip install ncnn 
-```
+
 Step 5: Upload the pre-trained model file on the cloud by running the following command:
 ``` 
 scp -i file_name.pem home/path_of_project.zip azureuser@ip_address:/home/azureuser/green_revolution/backend/checkpoints/facerecognition/model_folder
