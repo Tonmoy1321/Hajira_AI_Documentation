@@ -14,13 +14,25 @@ Note: Here, new_model_folder is just a placeholder for your folder name.
 
 3. Go to location: `Local_Hajira_lite_Dev/backend/src/config` and open `config.py`.
 4. Inside the config file under `config['models_path']['face_recognition']` add a new line with preferably new model folder name as key, which will consist of a dictionary with paths to new model weights and model file name.
-Example: `"new_model_name":{"weight": "new_model.pth", "path": "checkpoints/facerecognition/new_model_folder"}`.
+Example:
+```
+config = {
+        "models_path": {
+            "face_recognition": {
+                "arcface_ncnn": {"weight": "r100", "path": "checkpoints/facerecognition/arcface_ncnn" },
+                "ir50_torch":{"weight": "backbone_ir50_ms1m_epoch120.pth", "path": "checkpoints/facerecognition/ir50_torch"}, 
+                "new_model_name":{"weight": "new_model.pth", "path": "checkpoints/facerecognition/new_model_folder"}
+                },........
+
+```
 
 5. Then go to location: `Local_Hajira_lite_Dev/backend/src/libs/facerecognition` and open the `Learner.py` file.
-6. After opening the file, make sure the `self.model_path` is written in a way that uses config file to read the new model weight folder. Example: `self.model_path = config['models_path']['face_recognition']['new_model_name']['path']+ '/' + config['models_path']['face_recognition']['new_model_name']['weight']`.
+6. After opening the file, make sure the `self.model_path` is written in a way that uses config file to read the path to new model weight folder. Example: ``` python3
+ self.model_path = config['models_path']['face_recognition']['new_model_name']['path']+ '/' + config['models_path']['face_recognition']['new_model_name']['weight']` '
+ ```
 7. Make sure new model is loaded before inference; you may need to import a script that contains backbone of the new model. 
 8. Finally, DO NOT FORGET to replace the existing Facebank to a new fresh Facebank by going to the location: `Local_Hajira_lite_Dev/backend/checkpoints/facebank/fresh facebank`, copy `company_name.npy` and `company_name_embed.npy` file; then paste them in the following location: `Local_Hajira_lite_Dev/backend/checkpoints/facebank`. 
-10. After pasting the fresh facebank in the correct directory, go to location: `var/www/html/face-attendance-local/storage/app/public/users` 
+9. After pasting the fresh facebank in the correct directory, go to location: `var/www/html/face-attendance-local/storage/app/public/users` 
 ```bash
 cd var/www/html/face-attendance-local/storage/app/public/users
 ``` 
@@ -29,7 +41,7 @@ Stop all the supversior workers by running the command:
 sudo supervisorctl stop all
 ```
 All registered employee images for that company is saved here, delete all of them.
-11. Then open terminal and run:
+10. Then open terminal and run:
 ```bash
 cd /var/www/html/face-attendance-local
 ``` 
@@ -40,7 +52,7 @@ php artisan config:cache
 ```bash
 php artisan migrate:fresh --seed 
 ``` 
-12. Restart the supervisor workers `when model is also changed on cloud` instance. Restart supervisor workers by running the following command: 
+11. Restart the supervisor workers `when model is also changed on cloud` instance. Restart supervisor workers by running the following command: 
 ```bash
 sudo supervisorctl restart all
 ```
