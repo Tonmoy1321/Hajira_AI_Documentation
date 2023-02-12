@@ -27,38 +27,15 @@ config = {
 ```
 
 5. Then go to location: `Local_Hajira_lite_Dev/backend/src/libs/facerecognition` and open the `Learner.py` file.
-6. After opening the file, make sure the `self.model_path` is written in a way that uses config file to read the path to new model weight folder. 
+6. After opening the file, make sure the `self.model_path` is referencing the path to new model path. 
 Example: 
 ``` python3
  self.model_path = config['models_path']['face_recognition']['new_model_name']['path']+ '/' + config['models_path']['face_recognition']['new_model_name']['weight']` '
 ```
 7. Make sure new model is loaded before inference; you may need to import a script that contains backbone of the new model. 
-8. Finally, DO NOT FORGET to replace the existing Facebank to a new fresh Facebank by going to the location: `Local_Hajira_lite_Dev/backend/checkpoints/facebank/fresh facebank`, copy `company_name.npy` and `company_name_embed.npy` file; then paste them in the following location: `Local_Hajira_lite_Dev/backend/checkpoints/facebank`. 
-9. After pasting the fresh facebank in the correct directory, go to location: `var/www/html/face-attendance-local/storage/app/public/users` 
-```bash
-cd var/www/html/face-attendance-local/storage/app/public/users
-``` 
-Stop all the supversior workers by running the command:
-```bash
-sudo supervisorctl stop all
-```
-All registered employee images for that company is saved in this directory, delete all of them.
 
-10. Then open terminal and run:
-```bash
-cd /var/www/html/face-attendance-local
-``` 
-After current working location is changed, then cache and migrate fresh seed using(this will clean the existing local database):
-```bash
-php artisan config:cache 
-```
-```bash
-php artisan migrate:fresh --seed 
-``` 
-11. Restart the supervisor workers `when model is also changed on cloud` instance. Restart supervisor workers by running the following command: 
-```bash
-sudo supervisorctl restart all
-```
+8. Finally, DO NOT FORGET to replace the existing Facebank to a new fresh Facebank by going to the location: `Local_Hajira_lite_Dev/backend/checkpoints/facebank/fresh facebank`, copy `company_name.npy` and `company_name_embed.npy` file; then paste them in the following location: `Local_Hajira_lite_Dev/backend/checkpoints/facebank`. 
+
 
 
 ## How to change model in Cloud:
@@ -87,29 +64,6 @@ ssh -i file_name.pem azureuser@ip_address
 * please note the public IP address provided when VM was created
 * If you dont have the IP address ask the admin.
 
-Step 4.1: Install miniconda and other system dependencies 
-Run the following commands one by one in your azure vm:
-```bash
-mkdir -p ~/miniconda3
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
-bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-rm -rf ~/miniconda3/miniconda.sh
-~/miniconda3/bin/conda init bash
-~/miniconda3/bin/conda init zsh
-``` 
-`Note:` Install other pyhton modules required by checking requirements.txt file on t.ly/Ysh_  
-* `If pytorch cpu version doesn't install with pip then:` 
-```bash
-conda install pytorch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0 cpuonly -c pytorch 
-```
-* `If there is a error while running a python file, error is somewhat like: "ImportError: libGL.so.1: cannot open shared object file: No such file or directory"`; then run: 
-```bash 
-sudo apt-get install ffmpeg libsm6 libxext6  -y
-```
-* Then we have to install onnx: 
-```
-pip install onnx && pip install onnxruntime 
-```
 
 Step 5: Upload the pre-trained model file on the cloud by running the following command:
 ``` 
@@ -126,7 +80,9 @@ unzip path_of_project.zip && sudo rm -rf path_of_project.zip
 Note: Make sure unzip is installed in azure virtual machine. If not please install unzip.
 
 Step 7: Make changes in config file 
-Make changes in config file just like in local machine part. Add new line which points to new model weights folder.
+Make changes in config file just like in local machine part(Step:1 to Step:4) & add new line which points to new model weights folder(Step:5 to Step:6).
+*Note: Azure Virtual Machine path will be different than local machine. It should look like: `/Hajira_ML_Cloud/backend/`
+
     
 Step 8: Make changes in face recognition script
 Go to location where `Learner.py` script is located in the azure virtual machine.
