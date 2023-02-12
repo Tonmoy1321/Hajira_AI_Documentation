@@ -140,12 +140,5 @@ Step: 9 Restart the supervisor by running the following command:
 sudo supervisorctl restart all
 ```
 
-# Web Sync Part 
-First of all stop all supervisor worker by running the command: 
-```bash
-Sudo supervisorctl stop all
-```
-Then make sure to delete all the employee images from the localtion: `/var/www/html/face-attendance-local/storage/app/public/users`. 
-
 # Making changes in user information 
 Right now the facebank is empty and the attendance system will not work. To re-populate the new facebank with new model embeds we need to go to web HRM system of hajira (hajira.cpsd.com) and manually chnage image to update embeddings of the employees. 
