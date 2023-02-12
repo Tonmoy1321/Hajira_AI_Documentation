@@ -13,7 +13,7 @@ mkdir new_model_folder
 Note: Here, new_model_folder is just a placeholder for your folder name.
 
 3. Go to location: `Local_Hajira_lite_Dev/backend/src/config` and open `config.py`.
-4. Inside the config file under `config['models_path']['face_recognition']` add a new line with preferably new model folder name as key, which will consist of a dictionary with paths to new model weights and model file name.
+4. Inside the config file under `config['models_path']['face_recognition']` add a new line with preferably new model name as key, which will consist of a dictionary with paths to new model weights and model file name.
 Example:
 ```
 config = {
