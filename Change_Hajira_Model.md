@@ -42,7 +42,8 @@ Stop all the supversior workers by running the command:
 ```bash
 sudo supervisorctl stop all
 ```
-All registered employee images for that company is saved here, delete all of them.
+All registered employee images for that company is saved in this directory, delete all of them.
+
 10. Then open terminal and run:
 ```bash
 cd /var/www/html/face-attendance-local
