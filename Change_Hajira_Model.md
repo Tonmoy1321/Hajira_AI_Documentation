@@ -34,8 +34,6 @@ Example:
 ```
 7. Make sure new model is loaded before inference; you may need to import a script that contains backbone of the new model. 
 
-8. Finally, DO NOT FORGET to replace the existing Facebank to a new fresh Facebank by going to the location: `Local_Hajira_lite_Dev/backend/checkpoints/facebank/fresh facebank`, copy `company_name.npy` and `company_name_embed.npy` file; then paste them in the following location: `Local_Hajira_lite_Dev/backend/checkpoints/facebank`. 
-
 
 
 ## How to change model in Cloud:
@@ -98,4 +96,4 @@ sudo supervisorctl restart all
 ```
 
 # Making changes in user information 
-Right now the facebank is empty and the attendance system will not work. To re-populate the new facebank with new model embeds we need to go to web HRM system of hajira (hajira.cpsd.com) and manually chnage image to update embeddings of the employees. 
+We have to update images of every single employee using the web HRM system of hajira (hajira.cpsd.com) and manually change employee images.
