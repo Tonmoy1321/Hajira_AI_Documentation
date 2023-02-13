@@ -96,4 +96,4 @@ sudo supervisorctl restart all
 ```
 
 # Making changes in user information 
-We have to update images of every single employee using the web HRM system of hajira (hajira.cpsd.com) and manually change employee images.
+We have to update images of every single employee using the web HRM system of hajira (hajira.cpsd.com) and manually update employee images.
