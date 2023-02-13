@@ -32,8 +32,7 @@ Example:
 ``` python3
  self.model_path = config['models_path']['face_recognition']['new_model_name']['path']+ '/' + config['models_path']['face_recognition']['new_model_name']['weight']` '
 ```
-7. Make sure new model is loaded before inference; you may need to import a script that contains backbone of the new model. 
-
+7. Make sure new model is loaded before inference; you may need to import a script that contains backbone of the new model. For IR152, import IR152 backbone instead of IR50/current model and change instances IR50/current model to IR152.
 
 
 ## How to change model in Cloud:
