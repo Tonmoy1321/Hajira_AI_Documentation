@@ -250,8 +250,9 @@ Changing the `AllowOverride` directive for the /var/www directory to `AllowOverr
 sudo systemctl reload apache2
 ```` 
 #### Step-6.5: .env setup for local server
-First collect the required folder from admin and paste them inside the following directory: `/var/www/html/face-attendance-local`
-Go to directory: `path: /var/www/html/face-attendance-local` using:
+First collect the required folder from admin and paste them inside the following directory: `/var/www/html/face-attendance-local`.
+
+Then go to directory: `path: /var/www/html/face-attendance-local` using:
 ```bash
 cd /var/www/html/face-attendance-local
 ```
