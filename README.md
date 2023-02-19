@@ -288,6 +288,11 @@ cd /var/www/html/face-attendance-local && php artisan schedule:run >> /dev/null 
 * Deploy the facesocket and faceworker in supervisor 
 
 Copy facesocket.conf and faceworker.conf file from dev pc or provided link, then paste them in path:`/etc/supervisor/conf.d/` 
+Then Run:
+```bash
+sudo supervisorctl reread
+sudo supervisorctl restart all
+```
 
 ## Step-7: After setting up Hajira on machine
 We have to generate a new access key for the company being added to Facebank.
