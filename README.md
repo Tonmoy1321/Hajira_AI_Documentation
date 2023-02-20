@@ -308,4 +308,5 @@ Steps:
 Open terminal in that directory and Run: 
 ```bash
 sudo chmod 777 -R `folder`
-```
+``` 
+* If you fail to see .env or any other files in `/var/www/html/face-attendance-local`; they are most likely hidden. To see all hidden files inside a directory press: `ctrl+H`.
