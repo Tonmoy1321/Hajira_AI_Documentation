@@ -133,7 +133,7 @@ crontab -e
 ```
 Then add the line:
 ```bash
-* * * * * cd /var/www/html/face-attendance-local && php artisan schedule:run >> /dev/null 2>&1
+ * * * * * cd /var/www/html/face-attendance-local && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 ## Step-5: Setting UP Supervisor
