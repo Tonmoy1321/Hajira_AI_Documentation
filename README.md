@@ -287,10 +287,19 @@ cd /var/www/html/face-attendance-local && php artisan schedule:run >> /dev/null 
 #### Step-6.7: Deploy Supervisor 
 * Deploy the facesocket and faceworker in supervisor 
 
-Copy facesocket.conf and faceworker.conf file from dev pc or provided link, then paste them in path:`/etc/supervisor/conf.d/` 
+Copy facesocket.conf and faceworker.conf file from dev pc or provided link, then paste them in path:`/etc/supervisor/conf.d/`
+```bash
+cd /etc/supervisor/conf.d/
+```
+Then open the directory using nautilus:
+```bash 
+nautilus .
+```
+When the directory is opened, download/copy the `faceworker.conf` and `facesocket.conf` into the directory. Download link: [`Drive Link`](https://drive.google.com/drive/folders/1_JUYjubSQ_UffO0PG9wV_H9c7n-Fdk5h?usp=sharing)
 Then Run:
 ```bash
 sudo supervisorctl reread
+sudo supervisorctl update
 sudo supervisorctl restart all
 ```
 
@@ -309,4 +318,5 @@ Open terminal in that directory and Run:
 ```bash
 sudo chmod 777 -R `folder`
 ``` 
-* If you fail to see .env or any other files in `/var/www/html/face-attendance-local`; they are most likely hidden. To see all hidden files inside a directory press: `ctrl+H`.
+* If you fail to see .env or any other files in `/var/www/html/face-attendance-local`; they are most likely hidden. To see all hidden files inside a directory press: `ctrl+H`. 
+* Link to Fresh Facebank => [`Fresh Facebank`](https://drive.google.com/drive/folders/1y35Xj48E4BDEIrkf7XQ8bs-Ki7f2hdXV?usp=sharing)
