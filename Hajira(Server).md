@@ -65,14 +65,6 @@ sudo apt install supervisor
 sudo apt update
 ```
 
-#### Step-2.4:
-
-* Install Cron globally:
-
-```
-sudo apt install cron
-```
-
 ## Step-3: Automating Hajira using CronJob
 The cron command-line utility is a job scheduler on Unix-like operating systems. Users who set up and maintain software environments use cron to schedule jobs, also known as cron jobs, to run periodically at fixed times, dates, or intervals.
 
