@@ -316,7 +316,7 @@ Steps:
 * If images do not appear after syncing or can't copy any files/move files to any `folder`,
 Open terminal in that directory and Run: 
 ```bash
-sudo chmod 777 -R `folder`
+sudo chmod 777 -R `folder/`
 ``` 
 * If you fail to see .env or any other files in `/var/www/html/face-attendance-local`; they are most likely hidden. To see all hidden files inside a directory press: `ctrl+H`. 
 * Link to Fresh Facebank => [`Fresh Facebank`](https://drive.google.com/drive/folders/1y35Xj48E4BDEIrkf7XQ8bs-Ki7f2hdXV?usp=sharing)
