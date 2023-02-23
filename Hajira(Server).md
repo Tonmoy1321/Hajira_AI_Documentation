@@ -17,7 +17,7 @@ Firstly, Install Anaconda/Miniconda: open terminal and download miniconda
 After download Miniconda, install it by typing
 
 ```
-bash Miniconda3-py38_4.<span class="hljs-number">10.3</span>-Linux-x86_64.sh
+sudo bash Miniconda3-py38_4.10.3-Linux-x86_64.sh
 ```
 
 #### Step-1.3:
@@ -123,7 +123,7 @@ The file should lool like:
 [program:gr]
 directory=/home/gr/Face-Recognition-API/backend
 environment=PATH=/home/gr/miniconda3/envs/gr/bin
-command=/home/gr/miniconda3/envs/gr/bin/gunicorn app:app -b localhost:8080
+command=/home/gr/miniconda3/envs/gr/bin/gunicorn app:app -b localhost:8001
 autostart=true
 autorestart=true
 stderr_logfile=/home/gr/Face-Recognition-API/backend/logs/err.err.log
@@ -178,7 +178,7 @@ server {
     server_name  52.163.71.151;
 
     location / {
-        proxy_pass http://127.0.0.1:8080;
+        proxy_pass http://127.0.0.1:8001;
     }
 }
 ```
