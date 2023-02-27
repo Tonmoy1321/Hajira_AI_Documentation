@@ -150,7 +150,7 @@ The file should lool like:
 [program:gr]
 directory=/home/gr/Face-Recognition-API/backend
 environment=PATH=/home/gr/miniconda3/envs/gr/bin
-command=/home/gr/miniconda3/envs/gr/bin/gunicorn app:app -b localhost:8080
+command=/home/gr/miniconda3/envs/gr/bin/gunicorn app:app -b localhost:8001
 autostart=true
 autorestart=true
 stderr_logfile=/home/gr/Face-Recognition-API/backend/logs/err.err.log
@@ -181,7 +181,7 @@ sudo apt update
 sudo apt install apache2
 sudo systemctl start apache2
 sudo systemctl enable apache2
-sudo ufw allow “Apache Full”
+sudo ufw allow "Apache Full"
 sudo systemctl restart apache2
 ``` 
 #### Step-6.2: Installing MySQL and creating a DB
@@ -207,7 +207,7 @@ sudo apt-get install apache2 php7.4 libapache2-mod-php7.4 php7.4-curl php-pear p
 #### Step-6.3: Installing Composer 
 ```bash
 curl -sS https://getcomposer.org/installer | php
-mv composer.phar /usr/local/bin/composer
+sudo mv composer.phar /usr/local/bin/composer
 sudo chmod +x /usr/local/bin/composer
 ```
 
@@ -320,3 +320,4 @@ sudo chmod 777 -R `folder/`
 ``` 
 * If you fail to see .env or any other files in `/var/www/html/face-attendance-local`; they are most likely hidden. To see all hidden files inside a directory press: `ctrl+H`. 
 * Link to Fresh Facebank => [`Fresh Facebank`](https://drive.google.com/drive/folders/1y35Xj48E4BDEIrkf7XQ8bs-Ki7f2hdXV?usp=sharing)
+* To schedule powoer on/off timing of the deployed pc; make changes in your motherboard's bios, specifically look for a option called `power management`.    Make sure the time in bios is correct.
