@@ -268,7 +268,7 @@ DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=hajira_db
 DB_USERNAME=hajira_user
-DB_PASSWORD='secretpassword'
+DB_PASSWORD=secretpassword
 ```
 Then open terminal and run commands:
 ```bash
