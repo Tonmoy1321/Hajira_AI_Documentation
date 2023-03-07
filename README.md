@@ -237,7 +237,13 @@ After setting up virtual host, run:
 ```bash
 sudo systemctl reload apache2
 sudo a2ensite local-face.test
-sudo gedit /etc/hosts 127.0.0.1 local-face.test
+```
+```bash
+sudo gedit /etc/hosts
+```
+Change the line `127.0.0.1 localhost` to `127.0.0.1 local-face.test`.
+Then Run:
+```bash
 sudo systemctl reload apache2
 sudo a2enmod rewrite
 ``` 
