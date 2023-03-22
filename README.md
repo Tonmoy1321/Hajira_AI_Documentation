@@ -26,7 +26,7 @@ conda activate gr
 
 ## Step-2: Install required packages
 #### Step-2.1:
-- Download requirements.txt from >= [`Drive Link`](https://drive.google.com/file/d/1cX3p9hB-SIHsg7dMWFu-_DCxoVRIxO9a/view?usp=sharing)
+- Download requirements.txt from >= [`Drive Link`](https://docs.google.com/document/d/e/2PACX-1vRHW3mIXmy5gjOO3iEjwBcP0OB1yoA2hO1xf0ZnTYwvwPCicMs4NBTa4YgLXqdEZe0B2rG67OakwFqI/pub)
 - Then run the command: 
 ``` bash
 pip install -r requirements.txt
