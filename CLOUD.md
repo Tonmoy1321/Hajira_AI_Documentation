@@ -37,7 +37,10 @@ ssh -i file_name.pem azureuser@ip_address
 * please note the public IP address provided when VM was created
 7. To upload project, zip the folder and run the command:
 ``` 
-scp -i file_name.pem home/path_of_project.zip azureuser@ip_address:
+scp -i ssh_key.pem home/path_of_project.zip azureuser@ip_address:path_where_file_will_be_uploaded
 ```
-* NB: the colon after the command is important
+8. To download a file/folder(.zip format) from azure vm to local machine; use the following command:
+ ```
+ sudo scp -i ssh_key.pem azureuser@ip_address:path_to_zip_folder/file.zip download_path_in_local_machine
+ ```
 * Once the command is run, the project folder is uploaded in the VM
