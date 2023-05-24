@@ -288,7 +288,7 @@ crontab -e
 ```
 Add the following line:
 ```
-cd /var/www/html/face-attendance-local && php artisan schedule:run >> /dev/null 2>&1
+* * * * * cd /var/www/html/face-attendance-local && php artisan schedule:run >> /dev/null 2>&1
 ``` 
 #### Step-6.7: Deploy Supervisor 
 * Deploy the facesocket and faceworker in supervisor 
