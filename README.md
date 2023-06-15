@@ -337,11 +337,12 @@ sudo chmod 777 -R `folder/`
   firefox -kiosk http://local-face.test
 ```
 * To schedule the deployed pc to run the attendance script at a specific time frame; you can use the following bash script:
+
 ```bash
 #!/bin/bash
 
-while true
-do
+ while true
+ do
     hour_now=$(date +"%H")
     if [ $((hour_now)) -gt 07 ] && [ $((hour_now)) -lt 13 ]; then
         if pgrep -x python3 >/dev/null 2>&1; then
@@ -360,8 +361,8 @@ do
 	    sleep 5
         fi
      fi
-done
-`````
+ done
+```
 Add this script to `sudo crontab -e`. 
 * If you fail to see .env or any other files in `/var/www/html/face-attendance-local`; they are most likely hidden. To see all hidden files inside a directory press: `ctrl+H`. 
 * Link to Fresh Facebank => [`Fresh Facebank`](https://drive.google.com/drive/folders/1y35Xj48E4BDEIrkf7XQ8bs-Ki7f2hdXV?usp=sharing)
