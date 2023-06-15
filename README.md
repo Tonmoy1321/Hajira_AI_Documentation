@@ -323,7 +323,46 @@ Steps:
 Open terminal in that directory and Run: 
 ```bash
 sudo chmod 777 -R `folder/`
-``` 
+```
+* To open firefox at startup; use the following bash script:
+  ```bash
+  #!/bin/bash
+
+# Wait for Apache to start
+while ! curl -s http://localhost >/dev/null; do
+  sleep 1
+done
+
+# Run Firefox with the URL
+firefox -kiosk http://local-face.test
+```
+* To schedule the deployed pc to run the attendance script at a specific time frame; you can use the following bash script:
+```bash
+#!/bin/bash
+
+while true
+do
+    hour_now=$(date +"%H")
+    if [ $((hour_now)) -gt 07 ] && [ $((hour_now)) -lt 13 ]; then
+        if pgrep -x python3 >/dev/null 2>&1; then
+    	    echo "script running"
+            continue
+	else
+	    #echo "script not running"
+    	    sudo bash /home/grhrm/Local_Hajira_lite_Dev/RUN.sh >/home/grhrm/Local_Hajira_lite_Dev/backend/logs/cronlog 2>&1
+	    echo "Bash script started"
+            sleep 10
+        fi
+    else
+        if pgrep -x python3 >/dev/null 2>&1; then
+            sudo  killall python3
+	    echo "process killed"
+	    sleep 5
+        fi
+     fi
+done
+`````
+Add this script to `sudo crontab -e`. 
 * If you fail to see .env or any other files in `/var/www/html/face-attendance-local`; they are most likely hidden. To see all hidden files inside a directory press: `ctrl+H`. 
 * Link to Fresh Facebank => [`Fresh Facebank`](https://drive.google.com/drive/folders/1y35Xj48E4BDEIrkf7XQ8bs-Ki7f2hdXV?usp=sharing)
 * To schedule powoer on/off timing of the deployed pc; make changes in your motherboard's bios, specifically look for a option called `power management`.    Make sure the time in bios is correct.
