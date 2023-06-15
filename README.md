@@ -328,13 +328,13 @@ sudo chmod 777 -R `folder/`
   ```bash
   #!/bin/bash
 
-# Wait for Apache to start
-while ! curl -s http://localhost >/dev/null; do
-  sleep 1
-done
+  #Wait for Apache to start
+  while ! curl -s http://localhost >/dev/null; do
+    sleep 1
+  done
 
-# Run Firefox with the URL
-firefox -kiosk http://local-face.test
+  #Run Firefox with the URL
+  firefox -kiosk http://local-face.test
 ```
 * To schedule the deployed pc to run the attendance script at a specific time frame; you can use the following bash script:
 ```bash
