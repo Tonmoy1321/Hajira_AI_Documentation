@@ -336,6 +336,17 @@ sudo chmod 777 -R `folder/`
   #Run Firefox with the URL
   firefox -kiosk http://local-face.test
 ```
+#### ADD monitor screen while reboot the PC/Device
+
+Steps:
+- Goto Menu (9 dot left-bottom in Ubuntu)
+- Search Startup and open SatartUp Application
+- Click on "Add"
+- Fill the box using following data. 
+- Name: fire-fox
+- Command: bash path/to/firefox.sh
+- Comment: open firefox
+- DONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 * To schedule the deployed pc to run the attendance script at a specific time frame; you can use the following bash script:
 
 ```bash
