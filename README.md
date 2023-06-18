@@ -347,7 +347,7 @@ Steps:
 - Command: bash path/to/firefox.sh
 - Comment: open firefox
 - DONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-* To schedule the deployed pc to run the attendance script at a specific time frame; you can use the following bash script:
+#### To schedule the deployed pc to run the attendance script at a specific time frame; you can use the following bash script:
 
 ```bash
 #!/bin/bash
