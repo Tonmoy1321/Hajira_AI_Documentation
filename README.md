@@ -335,7 +335,7 @@ sudo chmod 777 -R `folder/`
 
   #Run Firefox with the URL
   firefox -kiosk http://local-face.test
-```
+  ```
 #### ADD monitor screen while reboot the PC/Device
 
 Steps:
