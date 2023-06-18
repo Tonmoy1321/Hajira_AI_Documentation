@@ -355,10 +355,11 @@ Steps:
  while true
  do
     hour_now=$(date +"%H")
-    if [ $((hour_now)) -gt 07 ] && [ $((hour_now)) -lt 13 ]; then
+    if [ $((hour_now)) -gt 07 ] && [ $((hour_now)) -lt 18 ]; then
         if pgrep -x python3 >/dev/null 2>&1; then
-    	    echo "script running"
-            continue
+    	    #echo "script running"
+            true 
+	    continue
 	else
 	    #echo "script not running"
     	    sudo bash /home/grhrm/Local_Hajira_lite_Dev/RUN.sh >/home/grhrm/Local_Hajira_lite_Dev/backend/logs/cronlog 2>&1
