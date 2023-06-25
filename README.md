@@ -356,7 +356,7 @@ while true
 do
 	hour_now=$(date +"%H")
 	# minute_now=$(date +"%M")
-	if [ $((10#$hour_now)) -ge 7 ] && [ $((10#$hour_now)) -lt 17 ]; then 
+	if [ $((10#$hour_now)) -ge 7 ] && [ $((10#$hour_now)) -lt 17 ]; then # 7 & 17 are hour values in 24 hour format
 		if pgrep -x python3 >/dev/null 2>&1; then
 	    		true
             		continue
@@ -366,7 +366,7 @@ do
 	    		echo "Bash script started"
             		sleep 5
             	fi
-	elif [ $((10#$hour_now)) -ge 17 ]; then
+	elif [ $((10#$hour_now)) -ge 17 ]; then # 17 is hour values in 24 hour format
 		if pgrep -x python3 >/dev/null 2>&1; then
             		sudo  killall python3
 	    		echo "process killed"
